@@ -5,10 +5,16 @@ import {
   fetchHourlyForcasts,
   fetcthDailyForecasts,
 } from "../api/weather";
+import { City } from "../types/weatherType";
+
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
 
 export const setWeather = createAsyncThunk(
   "weatherStatus",
-  async (coordinates, { rejectWithValue }) => {
+  async (coordinates: Coordinates, { rejectWithValue }) => {
     try {
       const city = await fetchCity(coordinates);
       const daily = await fetcthDailyForecasts(city);
@@ -38,16 +44,27 @@ export const setWeather = createAsyncThunk(
   }
 );
 
+interface Weather {
+  city: City | null;
+  current: any;
+  hourly: any;
+  daily: any;
+  status: "PENDING" | "REJECTED" | "SUCCESS" | null;
+  errorMessage: any;
+}
+
+const initialState: Weather = {
+  city: null,
+  current: null,
+  hourly: null,
+  daily: null,
+  status: null,
+  errorMessage: null,
+};
+
 const weatherSlice = createSlice({
   name: "weather",
-  initialState: {
-    city: null,
-    current: null,
-    hourly: null,
-    daily: null,
-    status: null,
-    errorMessage: null,
-  },
+  initialState,
   reducers: {
     clearAllWeather(state) {
       state.city = null;
@@ -58,24 +75,23 @@ const weatherSlice = createSlice({
       state.errorMessage = null;
     },
   },
-  extraReducers: {
-    [setWeather.pending]: (state) => {
-      state.status = "pending";
-    },
-    [setWeather.rejected]: (state, error) => {
-      state.errorMessage = error;
-      console.log("error", error);
-      state.status = "rejected";
-    },
-    [setWeather.fulfilled]: (state, action) => {
-      state.city = action.payload.city;
-      state.current = action.payload.current;
-      state.hourly = action.payload.hourly;
-      state.daily = action.payload.daily;
-      state.status = "success";
-      state.errorMessage = null;
-      console.log("action payload", action.payload);
-    },
+  extraReducers: (builder) => {
+    builder.addCase(setWeather.pending, (state) => {
+      state.status = "PENDING";
+    }),
+      builder.addCase(setWeather.rejected, (state, action) => {
+        state.errorMessage = action.payload;
+        state.status = "REJECTED";
+      }),
+      builder.addCase(setWeather.fulfilled, (state, action) => {
+        state.city = action.payload?.city;
+        state.current = action.payload?.current;
+        state.hourly = action.payload?.hourly;
+        state.daily = action.payload?.daily;
+        state.status = "SUCCESS";
+        state.errorMessage = null;
+        console.log("action payload", action.payload);
+      });
   },
 });
 

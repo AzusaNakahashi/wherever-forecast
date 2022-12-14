@@ -9,6 +9,7 @@ import Marker from "../components/Map/Marker";
 import { useAppDispatch, useAppSelector } from "../features/hooks";
 import map, { setCoordinates, setZoom } from "../features/map";
 import SearchBox from "../components/Map/SearchBox";
+import WeatherInfo from "../components/Map/WeatherInfo";
 
 const Home = () => {
   const mapInitialRender = (status: Status) => {
@@ -27,6 +28,7 @@ const Home = () => {
               <Marker />
             </Map>
             <SearchBox />
+            <WeatherInfo />
           </div>
         );
     }

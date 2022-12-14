@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-//import { setWeather } from "../../features/weather";
+import { setWeather } from "../../features/weather";
 import { setCoordinates, setZoom } from "../../features/map";
 import { useDispatch } from "react-redux";
 import styles from "../../styles/home/home.module.scss";

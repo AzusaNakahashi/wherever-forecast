@@ -13,6 +13,7 @@ import {
   setZoom,
   watchMapAuth,
 } from "../../features/map";
+import { setWeather } from "../../features/weather";
 
 interface MapProps extends google.maps.MapOptions {
   /*onClick?: (e: google.maps.MapMouseEvent) => void;
@@ -99,6 +100,12 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
       }
     }
   }, [map, dispatch]);
+
+  useEffect(() => {
+    if (map.mapOptions.coordinates) {
+      dispatch(setWeather(map.mapOptions.coordinates));
+    }
+  }, [dispatch, map.mapOptions.coordinates]);
 
   useDeepCompareEffectForMaps(() => {
     if (map.map) {
