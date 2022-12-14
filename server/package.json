@@ -1,0 +1,21 @@
+{
+  "name": "wherever-forecast",
+  "version": "1.0.0",
+  "description": "wheather forecast app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.is",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Azusa Nakahashi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
