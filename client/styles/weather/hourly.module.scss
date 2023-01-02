@@ -1,0 +1,91 @@
+@import "../../styles/variables.module.scss";
+
+/* hidden only for screen smaller than 900px width */
+.hidden {
+  display: none;
+}
+
+.hourly-weather-container {
+  padding: 1rem 0.5rem;
+  background-color: $background-color;
+  border-radius: $background-border-radius;
+  text-align: left;
+  margin-top: 1rem;
+  color: $text-color-primary;
+  .category-title {
+    display: none;
+  }
+  .hourly-weather-card {
+    .summary-container {
+      padding: 0.2rem 0;
+      display: grid;
+      grid-template-columns: 72px 40px minmax(40%, auto) auto;
+      grid-gap: 0.3rem;
+      > * {
+        align-self: center;
+        margin: 0;
+      }
+      .weather-icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    .weather-detail-table {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .hidden {
+    display: block;
+  }
+  .hourly-weather-container {
+    grid-column: 1 / 2; // from parent grid
+    grid-row: -1 / -2;
+    display: block !important;
+    margin-top: 0;
+    padding: 0;
+    .category-title {
+      display: block;
+      margin: 0;
+      font-size: $font-size-L;
+    }
+    > * {
+      border-bottom: 2px solid rgba($color: #000, $alpha: 0.2);
+      padding: 1rem;
+    }
+    :last-child {
+      border-bottom: none;
+    }
+    .hourly-weather-card {
+      .summary-container {
+        grid-template-columns: 72px 45px minmax(40%, auto) auto;
+        padding: 0;
+        margin-bottom: 0.5rem;
+        .weather-icon {
+          width: 43px;
+          height: 43px;
+        }
+      }
+      .weather-detail-table {
+        display: table;
+        width: 100%;
+        text-align: center;
+        tr > * {
+          width: 25%;
+          vertical-align: top;
+        }
+        tr {
+          th {
+            font-weight: $font-weight-regular;
+            color: $text-color-secondary;
+          }
+          td {
+            font-size: $font-size-L;
+          }
+        }
+      }
+    }
+  }
+}

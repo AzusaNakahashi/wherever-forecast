@@ -81,5 +81,4 @@ const mapSlice = createSlice({
 
 export const { setCoordinates, setZoom, clearMap, watchMapAuth } =
   mapSlice.actions;
-//export const selectCoodinates = (state) => state.coordinates;
 export default mapSlice.reducer;

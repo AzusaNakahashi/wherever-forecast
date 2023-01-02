@@ -1,0 +1,71 @@
+@import "../../styles/variables.module.scss";
+.weather-page-wrapper {
+  padding: 1rem 0.5rem;
+  color: $text-color-primary;
+  font-weight: $font-weight-regular;
+  .close-icon {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+    width: 100%;
+  }
+  .weather-category-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-transform: uppercase;
+    li {
+      padding: 0.5rem;
+      text-align: center;
+      color: $text-secondary-color;
+      cursor: pointer;
+    }
+    :hover {
+      color: $text-color-primary;
+    }
+    .selected {
+      border-bottom: 3px solid #fff501;
+      color: $text-primary-color;
+    }
+  }
+  .city-name {
+    margin: 1rem 0 0.5rem 0;
+    font-size: $font-size-L;
+    font-weight: $font-weight-regular;
+    text-align: center;
+  }
+}
+/*
+.sunny,
+.mostlySunny {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+    url("../../public/background-images/sunny.jpg") center;
+  background-size: cover;
+  background-attachment: fixed;
+}*/
+
+@media only screen and (min-width: 900px) {
+  .weather-page-wrapper {
+    padding: 1rem;
+    .close-icon {
+      padding: 0.7rem;
+    }
+    .weather-category-list {
+      display: none;
+    }
+    .city-name {
+      font-size: $font-size-XL;
+      width: 100%;
+    }
+    .weather-container {
+      display: grid;
+      grid-template-columns: calc(40% - 8px) calc(60% - 8px);
+      grid-template-rows: auto auto;
+      grid-gap: 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  }
+}
