@@ -2,6 +2,7 @@ import styles from "../../styles/weather/daily.module.scss";
 import WeatherIcon from "./WeatherIcon";
 import sortCityNameToShow from "../../service/sortCityNameToShow";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
+import sortImageCategory from "../../service/sortImageCategory";
 
 const Daily = ({ weatherType }: { weatherType: string }) => {
   const weather = useAppSelector((state) => state.weather);
@@ -31,7 +32,7 @@ const Daily = ({ weatherType }: { weatherType: string }) => {
           <div className={styles["highlight-container"]}>
             <div className={styles["weather-icon"]}>
               <WeatherIcon
-                iconPhrase={sortCityNameToShow(forecast.Day.Icon)}
+                iconPhrase={sortImageCategory(forecast.Day.Icon)}
                 iconHeight={90}
               />
             </div>

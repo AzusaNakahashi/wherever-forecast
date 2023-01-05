@@ -113,6 +113,8 @@ const WeatherIcon = ({
           alt="night flurries icon"
         />
       );
+    default:
+      return <Image src={SunnyIcon} height={iconHeight} alt="sunny icon" />;
   }
 };
 

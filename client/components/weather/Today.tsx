@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../features/hooks";
+import sortImageCategory from "../../service/sortImageCategory";
 import styles from "../../styles/weather/today.module.scss";
-import sortImageCategory from "../../service/sortCityNameToShow";
 import WeatherIcon from "./WeatherIcon";
 
 const Today = ({ weatherType }: { weatherType: string }) => {

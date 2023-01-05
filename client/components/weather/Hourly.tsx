@@ -2,6 +2,7 @@ import WeatherIcon from "./WeatherIcon";
 import sortCityNameToShow from "../../service/sortCityNameToShow";
 import styles from "../../styles/weather/hourly.module.scss";
 import { useAppSelector } from "../../features/hooks";
+import sortImageCategory from "../../service/sortImageCategory";
 
 const Hourly = ({ weatherType }: { weatherType: string }) => {
   const weather = useAppSelector((state) => state.weather);
@@ -30,7 +31,7 @@ const Hourly = ({ weatherType }: { weatherType: string }) => {
             <p>{extractTime(forecast.DateTime)}</p>
             <div className={styles["weather-icon"]}>
               <WeatherIcon
-                iconPhrase={sortCityNameToShow(forecast.WeatherIcon)}
+                iconPhrase={sortImageCategory(forecast.WeatherIcon)}
               />
             </div>
             <p>{forecast.IconPhrase}</p>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { setCurrentLocationCoordinates, clearMap } from "../../features/map";
+import { setWeather } from "../../features/weather";
 import styles from "../../styles/weather/wrapper.module.scss";
 import bgStyles from "../../styles/weather/background.module.scss";
 import Today from "./Today";
@@ -11,6 +12,7 @@ import Image from "next/image";
 import CloseIcon from "../../public/page-icons/close-icon.svg";
 import Spinner from "../pageState/Spinner";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
+import sortImageCategory from "../../service/sortImageCategory";
 
 const Weather = () => {
   const dispatch = useAppDispatch();
@@ -22,26 +24,27 @@ const Weather = () => {
     if (!map.mapOptions.coordinates) {
       dispatch(setCurrentLocationCoordinates());
     }
+    if (map.mapOptions.coordinates && !weather.status) {
+      dispatch(setWeather(map.mapOptions.coordinates));
+    }
     // when !map.map on index.js, load google map again
     // without this, error occur
     if (map.map) {
       dispatch(clearMap());
     }
-  }, [dispatch, map.map, map.mapOptions.coordinates]);
+  }, [dispatch, map.map, map.mapOptions.coordinates, weather.status]);
 
-  if (weather.current && weather.hourly) {
+  if (weather.status === "SUCCESS") {
     return (
       <>
         <div
           className={`${styles["weather-page-wrapper"]} ${
-            bgStyles[sortCityNameToShow(weather.current.WeatherIcon)]
+            bgStyles[sortImageCategory(weather.current.WeatherIcon)]
           }`}
         >
           <div className={styles["close-icon"]}>
             <Link href="/">
-              <a>
-                <Image src={CloseIcon} height={22} />
-              </a>
+              <Image src={CloseIcon} height={22} alt="close icon" />
             </Link>
           </div>
           <ul className={styles["weather-category-list"]}>

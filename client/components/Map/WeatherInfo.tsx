@@ -1,9 +1,9 @@
-import Link from "next/link";
 import styles from "../../styles/home/home.module.scss";
 import sortCityNameToShow from "../../service/sortCityNameToShow";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { useState } from "react";
 import { setWeather } from "../../features/weather";
+import Link from "next/link";
 
 const WeatherInfo = () => {
   const map = useAppSelector((state) => state.map);
