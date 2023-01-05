@@ -1,5 +1,5 @@
-import type { City } from "../types/weatherType";
-import type { ParentCity } from "../types/weatherType";
+import type { City } from "../types/city";
+import type { ParentCity } from "../types/city";
 
 const isLetter = (str: string) => {
   if (str) {

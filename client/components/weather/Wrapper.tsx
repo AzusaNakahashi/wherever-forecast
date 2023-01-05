@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { setCurrentLocationCoordinates, clearMap } from "../../features/map";
 import { setWeather } from "../../features/weather";
-import styles from "../../styles/weather/wrapper.module.scss";
-import bgStyles from "../../styles/weather/background.module.scss";
+import sortCityNameToShow from "../../service/sortCityNameToShow";
+import sortImageCategory from "../../service/sortImageCategory";
+import Link from "next/link";
+import Image from "next/image";
+import Spinner from "../pageState/Spinner";
 import Today from "./Today";
 import Hourly from "./Hourly";
 import Daily from "./Daily";
-import sortCityNameToShow from "../../service/sortCityNameToShow";
-import Link from "next/link";
-import Image from "next/image";
 import CloseIcon from "../../public/page-icons/close-icon.svg";
-import Spinner from "../pageState/Spinner";
-import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import sortImageCategory from "../../service/sortImageCategory";
+import styles from "../../styles/weather/wrapper.module.scss";
+import bgStyles from "../../styles/weather/background.module.scss";
 
 const Weather = () => {
   const dispatch = useAppDispatch();
   const weather = useAppSelector((state) => state.weather);
   const map = useAppSelector((state) => state.map);
-  const [category, setCategory] = useState("today");
+  const [weatherType, setWeatherType] = useState("today");
 
   useEffect(() => {
     if (!map.mapOptions.coordinates) {
@@ -49,20 +49,26 @@ const Weather = () => {
           </div>
           <ul className={styles["weather-category-list"]}>
             <li
-              className={category === "today" ? styles["selected"] : undefined}
-              onClick={() => setCategory("today")}
+              className={
+                weatherType === "today" ? styles["selected"] : undefined
+              }
+              onClick={() => setWeatherType("today")}
             >
               today
             </li>
             <li
-              className={category === "hourly" ? styles["selected"] : undefined}
-              onClick={() => setCategory("hourly")}
+              className={
+                weatherType === "hourly" ? styles["selected"] : undefined
+              }
+              onClick={() => setWeatherType("hourly")}
             >
               hourly
             </li>
             <li
-              className={category === "daily" ? styles["selected"] : undefined}
-              onClick={() => setCategory("daily")}
+              className={
+                weatherType === "daily" ? styles["selected"] : undefined
+              }
+              onClick={() => setWeatherType("daily")}
             >
               5 days
             </li>
@@ -71,9 +77,9 @@ const Weather = () => {
             {sortCityNameToShow(weather.city)}
           </h1>
           <div className={styles["weather-container"]}>
-            <Today weatherType={category} />
-            <Hourly weatherType={category} />
-            <Daily weatherType={category} />
+            <Today weatherType={weatherType} />
+            <Hourly weatherType={weatherType} />
+            <Daily weatherType={weatherType} />
           </div>
         </div>
       </>

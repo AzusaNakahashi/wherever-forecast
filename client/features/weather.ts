@@ -5,7 +5,10 @@ import {
   fetchHourlyForcasts,
   fetcthDailyForecasts,
 } from "../api/weather";
-import { City } from "../types/weatherType";
+import type { City } from "../types/city";
+import type { CurrentWeather } from "../types/weather/current";
+import type { HourlyWeather } from "../types/weather/hourly";
+import type { DailyWeather } from "../types/weather/daily";
 
 interface Coordinates {
   lat: number;
@@ -46,9 +49,9 @@ export const setWeather = createAsyncThunk(
 
 interface Weather {
   city: City | null;
-  current: any;
-  hourly: any;
-  daily: any;
+  current: CurrentWeather | null;
+  hourly: HourlyWeather[] | null;
+  daily: DailyWeather | null;
   status: "PENDING" | "REJECTED" | "SUCCESS" | null;
   errorMessage: any;
 }
