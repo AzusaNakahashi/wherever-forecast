@@ -24,8 +24,6 @@ const WeatherInfo = () => {
       dispatch(setWeather(map.mapOptions.coordinates));
     }
   });
-
-  console.log(weather);
   return (
     <>
       {weather.status === "SUCCESS" ? (

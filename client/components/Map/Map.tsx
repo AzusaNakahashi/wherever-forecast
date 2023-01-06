@@ -1,8 +1,6 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/home/home.module.scss";
-import Marker from "./Marker";
-import { createRoot } from "react-dom/client";
 import { createCustomEqual } from "fast-equals";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
@@ -24,23 +22,12 @@ interface MapProps extends google.maps.MapOptions {
 
 const Map: React.FC<MapProps> = ({ children, ...options }) => {
   const ref = useRef<HTMLDivElement>(null);
-  //const [map, setMap] = useState<google.maps.Map>();
   const mapStyles = {
     width: "100%",
     height: "100vh",
   };
   const dispatch = useAppDispatch();
   const map = useAppSelector((state) => state.map);
-  //const [map, setMap] = React.useState<google.maps.Map>();
-
-  console.log("map", map);
-
-  /*
-  const onClick = useCallback((e: google.maps.MapMouseEvent) => {
-    // avoid directly mutating state
-    setClicks([...clicks, e.latLng!]);
-    console.log("clicks", clicks);
-  }, [])*/
 
   window.gm_authFailure = () => {
     dispatch(watchMapAuth());
@@ -55,17 +42,7 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
     if (ref.current && !map.map) {
       // without zoom cause error
       //dispatch(setGooglegMap(param));
-      /*
-      const googleMap = new window.google.maps.Map(ref.current, {
-        center: { lat: 49.2827, lng: -123.1207 },
-        zoom: 13,
-        mapTypeControl: false,
-        fullscreenControl: false,
-        streetViewControl: false,
-        zoomControl: true,
-      });*/
       dispatch(setGooglegMap(ref.current));
-      //setMap(googleMap);
     }
     // set values when map and coordinates are ready
     if (map.map && map.mapOptions.coordinates) {

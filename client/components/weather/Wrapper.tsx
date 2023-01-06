@@ -19,6 +19,11 @@ const Weather = () => {
   const weather = useAppSelector((state) => state.weather);
   const map = useAppSelector((state) => state.map);
   const [weatherType, setWeatherType] = useState("today");
+  const weatherIsLoaded = () => {
+    if (weather.current && weather.daily && weather.hourly) {
+      return true;
+    }
+  };
 
   useEffect(() => {
     if (!map.mapOptions.coordinates) {
@@ -34,7 +39,7 @@ const Weather = () => {
     }
   }, [dispatch, map.map, map.mapOptions.coordinates, weather.status]);
 
-  if (weather.status === "SUCCESS") {
+  if (weather.status === "SUCCESS" && weather.current && weather.city) {
     return (
       <>
         <div

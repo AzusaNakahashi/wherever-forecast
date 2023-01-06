@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import styles from "../../styles/pageState/error.module.scss";
 import { setCurrentLocationCoordinates } from "../../features/map";
+import { useAppSelector } from "../../features/hooks";
 
 const Error = () => {
-  const map = useSelector((state) => state.map);
-  const weather = useSelector((state) => state.weather);
+  const weather = useAppSelector((state) => state.weather);
+  const map = useAppSelector((state) => state.map);
   const router = useRouter();
   const dispatch = useDispatch();
 

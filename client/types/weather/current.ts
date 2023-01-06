@@ -2,7 +2,7 @@ export type CurrentWeather = {
   LocalObservationDateTime: string;
   EpochTime: number;
   WeatherText: string;
-  WeatherIcon: string;
+  WeatherIcon: number;
   HasPrecipitation: boolean;
   PrecipitationType: string | null;
   IsDayTime: boolean;
@@ -93,11 +93,11 @@ export type CurrentWeather = {
       };
     };
   };
-  UVIndex: 3;
+  UVIndex: number;
   UVIndexText: string;
   Visibility: {
     Metric: {
-      Value: 1;
+      Value: number;
       Unit: string;
       UnitType: number;
     };
