@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "../../styles/home/home.module.scss";
 import { createCustomEqual } from "fast-equals";
 import { isLatLngLiteral } from "@googlemaps/typescript-guards";
@@ -35,7 +35,7 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
 
   useEffect(() => {
     // get current location coordinates
-    if (!map.mapOptions.coordinates) {
+    if (!map.mapOptions.coordinates && map.loadingStatus === null) {
       dispatch(setCurrentLocationCoordinates());
     }
     // get Map
@@ -76,6 +76,7 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
         map.map.addListener("idle", () => onIdle(map.map));
       }
     }
+    console.log(map);
   }, [map, dispatch]);
 
   useEffect(() => {
