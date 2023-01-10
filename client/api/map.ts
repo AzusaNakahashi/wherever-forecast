@@ -1,18 +1,20 @@
-const fetchCurrentLocation = () => {
+const fetchCurrentLocation = (): Promise<GeolocationPosition | Error> => {
   if (!navigator.geolocation) {
-    return Error("navigator.geolocation is not available");
+    throw Error("navigator.geolocation is not available");
   }
-  return new Promise((success) => {
+  const options = {
+    maximumAge: 60000,
+    timeout: 30000,
+    enableHighAccuracy: false,
+  };
+  return new Promise<GeolocationPosition | Error>((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
-      success,
-      (error) => {
-        throw error;
-      },
-      {
-        maximumAge: 60000,
-        timeout: 30000,
-        enableHighAccuracy: false,
-      }
+      resolve,
+      ({ code, message }) =>
+        reject(
+          Object.assign(new Error(message), { name: "PositionError", code })
+        ),
+      options
     );
   });
 };

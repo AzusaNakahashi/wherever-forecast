@@ -35,7 +35,10 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
 
   useEffect(() => {
     // get current location coordinates
-    if (!map.mapOptions.coordinates && map.loadingStatus === null) {
+    if (
+      !map.mapOptions.coordinates &&
+      map.loadingStatus.currentLocationCoordinates === null
+    ) {
       dispatch(setCurrentLocationCoordinates());
     }
     // get Map
@@ -80,6 +83,7 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
   }, [map, dispatch]);
 
   useEffect(() => {
+    console.log(map);
     if (map.mapOptions.coordinates) {
       dispatch(setWeather(map.mapOptions.coordinates));
     }

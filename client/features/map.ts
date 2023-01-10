@@ -5,12 +5,10 @@ import type { Map } from "../types/mapType";
 
 export const setCurrentLocationCoordinates = createAsyncThunk(
   "coordinates/fetchByCurretLocation",
-  async (param, { dispatch }) => {
+  async (): Promise<GeolocationPosition | Error> => {
     try {
-      const { coords } = await fetchCurrentLocation();
-      const coordinates = { lat: coords.latitude, lng: coords.longitude };
-      //dispatch(setWeather(coordinates));
-      return coordinates;
+      const res = await fetchCurrentLocation();
+      return res;
     } catch (error) {
       throw error;
     }
@@ -56,25 +54,31 @@ const mapSlice = createSlice({
     builder.addCase(setCurrentLocationCoordinates.pending, (state) => {
       state.loadingStatus.currentLocationCoordinates = "PENDING";
     }),
-      builder.addCase(setCurrentLocationCoordinates.rejected, (state) => {
-        state.loadingStatus.currentLocationCoordinates = "REJECTED";
-      }),
+      builder.addCase(
+        setCurrentLocationCoordinates.rejected,
+        (state, action) => {
+          console.log("rejected", action.payload);
+          state.loadingStatus.currentLocationCoordinates = "REJECTED";
+        }
+      ),
       builder.addCase(
         setCurrentLocationCoordinates.fulfilled,
         (state, action) => {
-          state.mapOptions.coordinates = action.payload;
+          const data = action.payload?.coords;
+          const coordinates = { lat: data.latitude, lng: data.longitude };
+          state.mapOptions.coordinates = coordinates;
           state.loadingStatus.currentLocationCoordinates = "SUCCESS";
         }
       ),
       builder.addCase(setGooglegMap.pending, (state) => {
-        state.loadingStatus.currentLocationCoordinates = "PENDING";
+        state.loadingStatus.map = "PENDING";
       }),
       builder.addCase(setGooglegMap.rejected, (state) => {
-        state.loadingStatus.currentLocationCoordinates = "REJECTED";
+        state.loadingStatus.map = "REJECTED";
       }),
       builder.addCase(setGooglegMap.fulfilled, (state, action) => {
         state.map = action.payload;
-        state.loadingStatus.currentLocationCoordinates = "SUCCESS";
+        state.loadingStatus.map = "SUCCESS";
       });
   },
 });
