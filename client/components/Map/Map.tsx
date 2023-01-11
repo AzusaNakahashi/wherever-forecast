@@ -79,11 +79,9 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
         map.map.addListener("idle", () => onIdle(map.map));
       }
     }
-    console.log(map);
   }, [map, dispatch]);
 
   useEffect(() => {
-    console.log(map);
     if (map.mapOptions.coordinates) {
       dispatch(setWeather(map.mapOptions.coordinates));
     }

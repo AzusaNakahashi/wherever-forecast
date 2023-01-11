@@ -9,38 +9,22 @@ import type { City } from "../types/city";
 import type { CurrentWeather } from "../types/weather/current";
 import type { HourlyWeather } from "../types/weather/hourly";
 import type { DailyWeather } from "../types/weather/daily";
-
-interface Coordinates {
-  lat: number;
-  lng: number;
-}
+import type { Coordinates } from "../types/mapType";
 
 export const setWeather = createAsyncThunk(
   "weatherStatus",
-  async (coordinates: Coordinates, { rejectWithValue }) => {
+  async (coordinates: Coordinates) => {
     try {
       const city = await fetchCity(coordinates);
       const daily = await fetcthDailyForecasts(city);
       const current = await fetchCurrentWeather(city);
       const hourly = await fetchHourlyForcasts(city);
-      // detect non technical error (still status)
-      // e.g. use selected invalid coordinates
-      const weathers = [city, daily, current, hourly];
-      let noError = true;
-      if (city.Error || daily.Error || current.Error || hourly.Error) {
-        noError = false;
-        // sorted as "reject"
-        return rejectWithValue(weathers);
-      }
-      if (noError) {
-        // sorted as "success"
-        return {
-          city: city,
-          current: current[0],
-          hourly: hourly,
-          daily: daily,
-        };
-      }
+      return {
+        city: city,
+        current: current[0],
+        hourly: hourly,
+        daily: daily,
+      };
     } catch (error) {
       throw error;
     }
@@ -93,7 +77,6 @@ const weatherSlice = createSlice({
         state.daily = action.payload?.daily;
         state.status = "SUCCESS";
         state.errorMessage = null;
-        console.log("action payload", action.payload);
       });
   },
 });

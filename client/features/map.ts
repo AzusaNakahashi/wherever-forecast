@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchCurrentLocation, fetchGoogleMap } from "../api/map";
 import type { Map } from "../types/mapType";
-//import { setWeather } from "./weather";
 
 export const setCurrentLocationCoordinates = createAsyncThunk(
   "coordinates/fetchByCurretLocation",
-  async (): Promise<GeolocationPosition | Error> => {
+  async () => {
     try {
       const res = await fetchCurrentLocation();
       return res;
@@ -57,14 +56,13 @@ const mapSlice = createSlice({
       builder.addCase(
         setCurrentLocationCoordinates.rejected,
         (state, action) => {
-          console.log("rejected", action.payload);
           state.loadingStatus.currentLocationCoordinates = "REJECTED";
         }
       ),
       builder.addCase(
         setCurrentLocationCoordinates.fulfilled,
         (state, action) => {
-          const data = action.payload?.coords;
+          const data = (action.payload as GeolocationPosition).coords;
           const coordinates = { lat: data.latitude, lng: data.longitude };
           state.mapOptions.coordinates = coordinates;
           state.loadingStatus.currentLocationCoordinates = "SUCCESS";

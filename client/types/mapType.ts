@@ -11,7 +11,7 @@ export type Map = {
     mapVerified: boolean | null;
   };
   loadingStatus: {
-    currentLocationCoordinates: string | null;
-    map: string | null;
+    currentLocationCoordinates: "SUCCESS" | "PENDING" | "REJECTED" | null;
+    map: "SUCCESS" | "PENDING" | "REJECTED" | null;
   };
 };
