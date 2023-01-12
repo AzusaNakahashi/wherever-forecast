@@ -28,7 +28,11 @@ export const setGooglegMap = createAsyncThunk(
 
 const initialState: Map = {
   map: null,
-  mapOptions: { coordinates: null, zoom: 13, mapVerified: null },
+  mapOptions: {
+    coordinates: null,
+    zoom: 13,
+    mapVerified: null,
+  },
   loadingStatus: { currentLocationCoordinates: null, map: null },
 };
 

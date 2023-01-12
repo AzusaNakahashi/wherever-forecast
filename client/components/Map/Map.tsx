@@ -44,16 +44,20 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
       //dispatch(setGooglegMap(param));
       dispatch(setGooglegMap(ref.current));
     }
-    // set values when map and coordinates are ready
-    if (map.map && map.mapOptions.coordinates) {
-      map.map.setCenter(map.mapOptions.coordinates);
-      map.map.setZoom(map.mapOptions.zoom);
-    }
 
     window.gm_authFailure = () => {
       dispatch(watchMapAuth());
     };
   }, [ref, map, dispatch, map.mapOptions.coordinates, map.mapOptions.zoom]);
+
+  useEffect(() => {
+    // set values when map and coordinates are ready
+    if (map.map && map.mapOptions.coordinates) {
+      console.log("fired");
+      map.map.setCenter(map.mapOptions.coordinates);
+      map.map.setZoom(map.mapOptions.zoom);
+    }
+  }, []);
 
   // event handlers
   useEffect(() => {
@@ -66,6 +70,8 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
     };
     const onIdle = (m: google.maps.Map) => {
       dispatch(setZoom(m.getZoom()!));
+      //map?.map?.setCenter(m.getCenter()!.toJSON());
+      //setCenter(m.getCenter()!.toJSON());
     };
     if (map.map) {
       ["click", "idle"].forEach((eventName) =>
