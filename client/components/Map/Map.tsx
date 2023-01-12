@@ -20,6 +20,12 @@ interface MapProps extends google.maps.MapOptions {
   children?: React.ReactNode;
 }
 
+declare global {
+  interface Window {
+    gm_authFailure: () => void;
+  }
+}
+
 const Map: React.FC<MapProps> = ({ children, ...options }) => {
   const ref = useRef<HTMLDivElement>(null);
   const mapStyles = {
@@ -48,6 +54,7 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
       map.map.setCenter(map.mapOptions.coordinates);
       map.map.setZoom(map.mapOptions.zoom);
     }
+
     window.gm_authFailure = () => {
       dispatch(watchMapAuth());
     };
