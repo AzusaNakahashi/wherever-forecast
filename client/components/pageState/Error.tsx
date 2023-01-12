@@ -19,7 +19,6 @@ const Error = () => {
   return (
     <div className={styles["error-container"]}>
       <h1>Oops! Something went wrong.</h1>
-      <p>we are automatically going to reload the home page...</p>
     </div>
   );
 };

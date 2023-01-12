@@ -26,7 +26,7 @@ const WeatherInfo = () => {
   });
   return (
     <>
-      {weather.status === "SUCCESS" ? (
+      {weather.daily && weather.current && weather.status === "SUCCESS" ? (
         <div className={styles["weather"]}>
           <p className={styles["location"]}>
             {weather.city && sortCityNameToShow(weather.city)}
@@ -141,8 +141,8 @@ const WeatherInfo = () => {
               </table>
             </div>
           </div>
-          <Link href="/weather">
-            <button className={styles["see-more-button"]}>SEE MORE</button>
+          <Link href="/weather" className={styles["see-more-button"]}>
+            <button>SEE MORE</button>
           </Link>
         </div>
       ) : (

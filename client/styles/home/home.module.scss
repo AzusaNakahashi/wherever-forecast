@@ -73,14 +73,21 @@
       margin: 0;
     }
     .see-more-button {
+      display: flex;
+      align-content: center;
+      justify-content: center;
       margin: 0.5rem;
       padding: 0.5rem;
       width: 100%;
       max-width: 400px;
       border-radius: 5px;
-      border: none;
-      color: $text-color-primary;
       background-color: #4880d7;
+      button {
+        border: none;
+        background-color: transparent;
+        color: $text-color-primary;
+        cursor: pointer;
+      }
     }
   }
 }

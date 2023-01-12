@@ -29,10 +29,6 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
   const dispatch = useAppDispatch();
   const map = useAppSelector((state) => state.map);
 
-  window.gm_authFailure = () => {
-    dispatch(watchMapAuth());
-  };
-
   useEffect(() => {
     // get current location coordinates
     if (
@@ -52,6 +48,9 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
       map.map.setCenter(map.mapOptions.coordinates);
       map.map.setZoom(map.mapOptions.zoom);
     }
+    window.gm_authFailure = () => {
+      dispatch(watchMapAuth());
+    };
   }, [ref, map, dispatch, map.mapOptions.coordinates, map.mapOptions.zoom]);
 
   // event handlers
