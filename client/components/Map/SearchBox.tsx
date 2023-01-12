@@ -4,6 +4,7 @@ import { setCoordinates, setZoom } from "../../features/map";
 import { useDispatch } from "react-redux";
 import styles from "../../styles/home/home.module.scss";
 import { useAppSelector } from "../../features/hooks";
+import { Coordinates } from "../../types/mapType";
 
 interface Input {
   element: HTMLInputElement;
@@ -27,16 +28,14 @@ const SearchBox = () => {
     if (searchBox && map.map) {
       searchBox.instance.addListener("places_changed", () => {
         const places = searchBox.instance.getPlaces();
-        console.log("places", places);
         if (places?.length) {
           const coordinates = {
             lat: places[0].geometry?.location?.lat(),
             lng: places[0].geometry?.location?.lng(),
           };
           dispatch(setCoordinates(coordinates));
-          //dispatch(setWeather(coordinates));
           dispatch(setZoom(13));
-          map.map?.setCenter(map.mapOptions.coordinates);
+          map.map?.setCenter(coordinates as Coordinates);
           searchBox.element.value = "";
         }
       });
