@@ -13,17 +13,13 @@ import Daily from "./Daily";
 import CloseIcon from "../../public/page-icons/close-icon.svg";
 import styles from "../../styles/weather/wrapper.module.scss";
 import bgStyles from "../../styles/weather/background.module.scss";
+import Error from "../pageState/Error";
 
 const Weather = () => {
   const dispatch = useAppDispatch();
   const weather = useAppSelector((state) => state.weather);
   const map = useAppSelector((state) => state.map);
   const [weatherType, setWeatherType] = useState("today");
-  const weatherIsLoaded = () => {
-    if (weather.current && weather.daily && weather.hourly) {
-      return true;
-    }
-  };
 
   useEffect(() => {
     if (!map.mapOptions.coordinates) {
@@ -32,8 +28,6 @@ const Weather = () => {
     if (map.mapOptions.coordinates && !weather.status) {
       dispatch(setWeather(map.mapOptions.coordinates));
     }
-    // when !map.map on index.js, load google map again
-    // without this, error occur
     if (map.map) {
       dispatch(clearMap());
     }
@@ -90,6 +84,11 @@ const Weather = () => {
       </>
     );
   }
+
+  if (weather.status === "REJECTED") {
+    return <Error />;
+  }
+
   return <Spinner />;
 };
 

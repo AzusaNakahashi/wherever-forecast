@@ -255,6 +255,8 @@ const Today = ({ weatherType }: { weatherType: string }) => {
       </div>
     );
   }
+
+  return <div></div>;
 };
 
 export default Today;

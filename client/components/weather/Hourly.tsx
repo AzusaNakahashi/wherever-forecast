@@ -65,6 +65,8 @@ const Hourly = ({ weatherType }: { weatherType: string }) => {
       </div>
     );
   }
+
+  return <div></div>;
 };
 
 export default Hourly;
