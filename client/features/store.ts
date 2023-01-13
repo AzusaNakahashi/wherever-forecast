@@ -8,6 +8,10 @@ export const store = configureStore({
     weather: weatherReducer,
     map: mapReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 const makeStore = () => store;
