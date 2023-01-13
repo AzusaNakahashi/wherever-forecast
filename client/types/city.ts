@@ -49,9 +49,7 @@ export type City = {
     };
   };
   IsAlias: boolean;
-  ParentCity?:
-    | { Key: string; LocalizedName: string; EnglishName: string }
-    | string;
+  ParentCity?: { Key: string; LocalizedName: string; EnglishName: string };
   SupplementalAdminAreas: {
     Level: number;
     LocalizedName: string;
