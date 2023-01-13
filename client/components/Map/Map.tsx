@@ -21,7 +21,7 @@ declare global {
   }
 }
 
-const Map: React.FC<MapProps> = ({ children }) => {
+const Map: React.FC<MapProps> = ({ children, ...options }) => {
   const ref = useRef<HTMLDivElement>(null);
   const mapStyles = {
     width: "100%",
