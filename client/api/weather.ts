@@ -6,6 +6,7 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 const fetchCity = async (coordinates: Coordinates) => {
   try {
     const param = `${coordinates.lat},${coordinates.lng}`;
+    console.log("server", SERVER_URL);
     const res = await axios.get(`${SERVER_URL}/city/${param}`);
     return res.data;
   } catch (error) {
