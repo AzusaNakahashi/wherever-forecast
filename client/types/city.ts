@@ -1,11 +1,3 @@
-export type DataSets = {};
-
-export type ParentCity = {
-  Key: string;
-  LocalizedName: string;
-  EnglishName: string;
-};
-
 export type City = {
   Version: number;
   Key: string;
@@ -57,7 +49,9 @@ export type City = {
     };
   };
   IsAlias: boolean;
-  ParentCity?: ParentCity | string;
+  ParentCity?:
+    | { Key: string; LocalizedName: string; EnglishName: string }
+    | string;
   SupplementalAdminAreas: {
     Level: number;
     LocalizedName: string;
