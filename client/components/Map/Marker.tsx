@@ -18,7 +18,7 @@ const Marker: React.FC<google.maps.MarkerOptions> = (map) => {
   }, [marker, map]);
 
   useEffect(() => {
-    const coordinates = mapRedux.mapOptions.coordinates;
+    const coordinates = mapRedux.mapOptions.coordinates.marker;
     if (marker && coordinates) {
       marker.setOptions({ map: map.map, position: coordinates });
     }

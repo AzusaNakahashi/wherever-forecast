@@ -22,16 +22,16 @@ const Weather = () => {
   const [weatherType, setWeatherType] = useState("today");
 
   useEffect(() => {
-    if (!map.mapOptions.coordinates) {
+    if (!map.mapOptions.coordinates.marker) {
       dispatch(setCurrentLocationCoordinates());
     }
-    if (map.mapOptions.coordinates && !weather.status) {
-      dispatch(setWeather(map.mapOptions.coordinates));
+    if (map.mapOptions.coordinates.marker && !weather.status) {
+      dispatch(setWeather(map.mapOptions.coordinates.marker));
     }
     if (map.map) {
       dispatch(clearMap());
     }
-  }, [dispatch, map.map, map.mapOptions.coordinates, weather.status]);
+  }, [dispatch, map.map, map.mapOptions.coordinates.marker, weather.status]);
 
   if (weather.status === "SUCCESS" && weather.current && weather.city) {
     return (

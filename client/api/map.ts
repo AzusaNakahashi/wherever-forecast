@@ -21,7 +21,7 @@ const fetchCurrentLocation = (): Promise<GeolocationPosition | Error> => {
 
 const fetchGoogleMap = (ref: HTMLDivElement): google.maps.Map => {
   return new window.google.maps.Map(ref, {
-    center: { lat: 49.2827, lng: -123.1207 },
+    center: { lat: 49.888, lng: -119.496 },
     zoom: 13,
     mapTypeControl: false,
     fullscreenControl: false,

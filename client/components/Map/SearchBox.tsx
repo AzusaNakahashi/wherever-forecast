@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { setWeather } from "../../features/weather";
-import { setCoordinates, setZoom } from "../../features/map";
+import { setCenter, setCoordinates, setZoom } from "../../features/map";
 import { useDispatch } from "react-redux";
 import styles from "../../styles/home/home.module.scss";
 import { useAppSelector } from "../../features/hooks";
@@ -35,7 +35,6 @@ const SearchBox = () => {
           };
           dispatch(setCoordinates(coordinates));
           dispatch(setZoom(13));
-          map.map?.setCenter(coordinates as Coordinates);
           searchBox.element.value = "";
         }
       });

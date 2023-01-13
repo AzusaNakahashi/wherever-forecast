@@ -6,7 +6,10 @@ export type Coordinates = {
 export type Map = {
   map: google.maps.Map | null;
   mapOptions: {
-    coordinates: Coordinates | null;
+    coordinates: {
+      mapCenter: Coordinates | google.maps.LatLng | null;
+      marker: Coordinates | null;
+    };
     zoom: number;
     mapVerified: boolean | null;
   };

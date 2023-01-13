@@ -29,7 +29,7 @@ export const setGooglegMap = createAsyncThunk(
 const initialState: Map = {
   map: null,
   mapOptions: {
-    coordinates: null,
+    coordinates: { mapCenter: null, marker: null },
     zoom: 13,
     mapVerified: null,
   },
@@ -41,9 +41,11 @@ const mapSlice = createSlice({
   initialState,
   reducers: {
     setCoordinates(state, action) {
-      state.mapOptions.coordinates = action.payload;
+      console.log("set coordinates");
+      state.mapOptions.coordinates.marker = action.payload;
     },
     setZoom(state, action) {
+      console.log("zoom!!!");
       state.mapOptions.zoom = action.payload;
     },
     clearMap(state) {
@@ -51,6 +53,9 @@ const mapSlice = createSlice({
     },
     watchMapAuth(state) {
       state.loadingStatus.map = "REJECTED";
+    },
+    setCenter(state, action) {
+      state.mapOptions.coordinates.mapCenter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -68,7 +73,7 @@ const mapSlice = createSlice({
         (state, action) => {
           const data = (action.payload as GeolocationPosition).coords;
           const coordinates = { lat: data.latitude, lng: data.longitude };
-          state.mapOptions.coordinates = coordinates;
+          state.mapOptions.coordinates.marker = coordinates;
           state.loadingStatus.currentLocationCoordinates = "SUCCESS";
         }
       ),
@@ -85,6 +90,6 @@ const mapSlice = createSlice({
   },
 });
 
-export const { setCoordinates, setZoom, clearMap, watchMapAuth } =
+export const { setCoordinates, setZoom, clearMap, watchMapAuth, setCenter } =
   mapSlice.actions;
 export default mapSlice.reducer;
