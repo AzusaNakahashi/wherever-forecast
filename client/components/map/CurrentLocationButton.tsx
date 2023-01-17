@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setCurrentLocationCoordinates } from "../../features/map";
+import { setCurrentLocationCoordinates, setZoom } from "../../features/map";
 import styles from "../../styles/home/home.module.scss";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import Image from "next/image";
@@ -26,8 +26,8 @@ const CurrentLocationButton = () => {
   useEffect(() => {
     if (button && map.map) {
       button.addEventListener("click", () => {
-        console.log("clicked");
         dispatch(setCurrentLocationCoordinates());
+        dispatch(setZoom(13));
       });
     }
   }, [button, map.map, dispatch]);

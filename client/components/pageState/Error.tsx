@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import styles from "../../styles/pageState/error.module.scss";
-import { setCurrentLocationCoordinates } from "../../features/map";
 import { useAppSelector } from "../../features/hooks";
 
 const Error = () => {
