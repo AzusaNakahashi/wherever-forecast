@@ -21,7 +21,9 @@ const Spinner = () => {
   ]);
   return (
     <div className={styles["spinner-container"]}>
-      <div className={styles["spinner-icon"]}></div>
+      <div className={styles["content-wrapper"]}>
+        <div className={styles["spinner-icon"]}></div>
+      </div>
       <p className={styles["text"]}>{message}</p>
     </div>
   );

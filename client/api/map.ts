@@ -1,4 +1,4 @@
-const fetchCurrentLocation = (): Promise<GeolocationPosition | Error> => {
+const fetchCurrentLocation = () => {
   if (!navigator.geolocation) {
     throw Error("navigator.geolocation is not available");
   }

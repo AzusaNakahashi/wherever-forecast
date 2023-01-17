@@ -8,6 +8,7 @@ import WeatherInfo from "../components/map/WeatherInfo";
 import Spinner from "../components/pageState/Spinner";
 import Error from "../components/pageState/Error";
 import { useAppSelector } from "../features/hooks";
+import CurrentLocationButton from "../components/map/CurrentLocationButton";
 
 const MapWrapper = () => {
   const map = useAppSelector((state) => state.map);
@@ -42,6 +43,7 @@ const MapWrapper = () => {
         <Marker />
       </Map>
       <SearchBox />
+      <CurrentLocationButton />
       <WeatherInfo />
       {loadingStatus === "PENDING" ? <Spinner /> : ""}
       {loadingStatus === "REJECTED" ? <Error /> : ""}
@@ -63,7 +65,7 @@ const Home = () => {
   return (
     <>
       <Wrapper
-        apiKey={"AIzaSyBXdv-Ybg9fCfMLswo150ltskkng12Sods"}
+        apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY!}
         render={mapInitialRender}
         libraries={["places"]}
       />

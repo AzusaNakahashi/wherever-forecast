@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { setWeather } from "../../features/weather";
 import { setCenter, setCoordinates, setZoom } from "../../features/map";
-import { useDispatch } from "react-redux";
 import styles from "../../styles/home/home.module.scss";
-import { useAppSelector } from "../../features/hooks";
-import { Coordinates } from "../../types/mapType";
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
 
 interface Input {
   element: HTMLInputElement;
@@ -14,8 +11,7 @@ interface Input {
 const SearchBox = () => {
   const [searchBox, setSearchBox] = useState<Input | null>();
   const map = useAppSelector((state) => state.map);
-  const dispatch = useDispatch();
-  let value;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!searchBox && map.map) {
@@ -34,12 +30,13 @@ const SearchBox = () => {
             lng: places[0].geometry?.location?.lng(),
           };
           dispatch(setCoordinates(coordinates));
+          dispatch(setCenter(coordinates));
           dispatch(setZoom(13));
           searchBox.element.value = "";
         }
       });
     }
-  }, [map, value, dispatch, searchBox]);
+  }, [map, dispatch, searchBox]);
   return (
     <input
       type="text"

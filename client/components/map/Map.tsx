@@ -65,7 +65,6 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
     if (map.map && map.mapOptions.coordinates.marker) {
       // set only map center and zoom
       // marker is set in Marker.tsx separately
-      console.log("first code");
       map.map.setCenter(map.mapOptions.coordinates.marker);
     }
   }, [map.map, map.mapOptions.coordinates.marker]);
