@@ -5,7 +5,6 @@ import Head from "next/head";
 import "../styles/globals.css";
 
 function MyApp({ Component, ...rest }: AppProps) {
-  console.log(wrapper);
   const { store, props } = wrapper.useWrappedStore(rest);
   const { pageProps } = props;
   return (
