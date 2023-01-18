@@ -12,7 +12,6 @@ const CurrentLocationButton = () => {
 
   useEffect(() => {
     if (!button && map.map) {
-      console.log("fired button");
       const getlocationButton = document.getElementById(
         "geolocationButton"
       ) as HTMLButtonElement;

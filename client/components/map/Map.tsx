@@ -3,8 +3,8 @@ import { useEffect, useRef } from "react";
 import styles from "../../styles/home/home.module.scss";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import {
-  setCenter,
-  setCoordinates,
+  setCenterCoordinates,
+  setMarkerCoordinates,
   setCurrentLocationCoordinates,
   setGooglegMap,
   setZoom,
@@ -75,11 +75,6 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
   // map.mapOptions.coordinates.mapCenter and map.mapOptions.zoom will be set on this Map.tsx
   useEffect(() => {
     if (map.map && map.mapOptions.coordinates.mapCenter) {
-      console.log(
-        "map center change fired",
-        map.mapOptions.zoom,
-        map.mapOptions.coordinates.mapCenter
-      );
       map.map.setCenter(map.mapOptions.coordinates.mapCenter);
       map.map.setZoom(map.mapOptions.zoom);
     }
@@ -92,13 +87,12 @@ const Map: React.FC<MapProps> = ({ children, ...options }) => {
         // avoid directly mutating state
         if (e.latLng) {
           const coordinates = { lat: e.latLng.lat(), lng: e.latLng.lng() };
-          dispatch(setCoordinates(coordinates));
+          dispatch(setMarkerCoordinates(coordinates));
         }
       };
       const onIdle = (m: google.maps.Map) => {
-        console.log("idle working");
         dispatch(setZoom(m.getZoom()!));
-        dispatch(setCenter(m.getCenter()!));
+        dispatch(setCenterCoordinates(m.getCenter()!));
       };
       ["click", "idle"].forEach((eventName) =>
         google.maps.event.clearListeners(map, eventName)

@@ -40,12 +40,13 @@ const mapSlice = createSlice({
   name: "map",
   initialState,
   reducers: {
-    setCoordinates(state, action) {
-      console.log("set coordinates");
+    setMarkerCoordinates(state, action) {
       state.mapOptions.coordinates.marker = action.payload;
     },
+    setCenterCoordinates(state, action) {
+      state.mapOptions.coordinates.mapCenter = action.payload;
+    },
     setZoom(state, action) {
-      console.log("zoom!!!");
       state.mapOptions.zoom = action.payload;
     },
     clearMap(state) {
@@ -53,9 +54,6 @@ const mapSlice = createSlice({
     },
     watchMapAuth(state) {
       state.loadingStatus.map = "REJECTED";
-    },
-    setCenter(state, action) {
-      state.mapOptions.coordinates.mapCenter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -90,6 +88,11 @@ const mapSlice = createSlice({
   },
 });
 
-export const { setCoordinates, setZoom, clearMap, watchMapAuth, setCenter } =
-  mapSlice.actions;
+export const {
+  setMarkerCoordinates,
+  setCenterCoordinates,
+  setZoom,
+  clearMap,
+  watchMapAuth,
+} = mapSlice.actions;
 export default mapSlice.reducer;

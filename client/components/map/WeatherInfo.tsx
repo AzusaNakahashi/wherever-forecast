@@ -1,7 +1,7 @@
 import styles from "../../styles/home/home.module.scss";
 import sortCityNameToShow from "../../service/sortCityNameToShow";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { setWeather } from "../../features/weather";
 import Link from "next/link";
 
@@ -34,14 +34,14 @@ const WeatherInfo = () => {
           <div className={styles["current-summary"]}>
             <p className={styles["title"]}>Current Conditions</p>
             <p className={styles["temperature"]}>
-              {Math.round(weather.current?.ApparentTemperature.Metric.Value)}°C
+              {Math.round(weather.current.ApparentTemperature.Metric.Value)}°C
             </p>
             <p className={styles["weather-condition"]}>
-              {weather.current?.WeatherText}
+              {weather.current.WeatherText}
             </p>
             <p className={styles["real-feel-temperature"]}>
               Feels like{" "}
-              {Math.round(weather.current?.RealFeelTemperature.Metric.Value)}°C
+              {Math.round(weather.current.RealFeelTemperature.Metric.Value)}°C
             </p>
           </div>
           <div className={styles["today-weather"]}>
@@ -49,17 +49,17 @@ const WeatherInfo = () => {
               <p className={styles["title"]}>Today</p>
               <p className={styles["temperature"]}>
                 {Math.round(
-                  weather.daily?.DailyForecasts[0].Temperature.Maximum.Value
+                  weather.daily.DailyForecasts[0].Temperature.Maximum.Value
                 )}
                 °C
               </p>
               <p className={styles["weather-condition"]}>
-                {weather.daily?.DailyForecasts[0].Day.IconPhrase}
+                {weather.daily.DailyForecasts[0].Day.IconPhrase}
               </p>
               <p className={styles["real-feel-temperature"]}>
                 Feels like{" "}
                 {Math.round(
-                  weather.daily?.DailyForecasts[0].RealFeelTemperature.Maximum
+                  weather.daily.DailyForecasts[0].RealFeelTemperature.Maximum
                     .Value
                 )}
                 °C
@@ -77,14 +77,14 @@ const WeatherInfo = () => {
                   <tr>
                     <td>
                       {Math.round(
-                        weather.daily?.DailyForecasts[0].Temperature.Minimum
+                        weather.daily.DailyForecasts[0].Temperature.Minimum
                           .Value
                       )}
                       {"°C"}
                     </td>
                     <td>
-                      {weather.daily?.DailyForecasts[0].HoursOfSun}
-                      {weather.daily?.DailyForecasts[0].HoursOfSun > 1
+                      {weather.daily.DailyForecasts[0].HoursOfSun}
+                      {weather.daily.DailyForecasts[0].HoursOfSun > 1
                         ? "hrs"
                         : "hr"}
                     </td>
@@ -102,16 +102,13 @@ const WeatherInfo = () => {
                   <tr>
                     <td>
                       {" "}
-                      {
-                        weather.daily?.DailyForecasts[0].AirAndPollen[5]
-                          .Category
-                      }
+                      {weather.daily.DailyForecasts[0].AirAndPollen[5].Category}
                     </td>
                     <td>
-                      {weather.daily?.DailyForecasts[0].Day.Wind.Speed.Value}
+                      {weather.daily.DailyForecasts[0].Day.Wind.Speed.Value}
                       {"km "}
                       {
-                        weather.daily?.DailyForecasts[0].Day.Wind.Direction
+                        weather.daily.DailyForecasts[0].Day.Wind.Direction
                           .English
                       }
                     </td>
@@ -128,13 +125,10 @@ const WeatherInfo = () => {
                 <tbody>
                   <tr>
                     <td>
-                      {
-                        weather.daily?.DailyForecasts[0].AirAndPollen[0]
-                          .Category
-                      }
+                      {weather.daily.DailyForecasts[0].AirAndPollen[0].Category}
                     </td>
                     <td>
-                      {extractTime(weather.daily?.DailyForecasts[0].Sun.Set)}
+                      {extractTime(weather.daily.DailyForecasts[0].Sun.Set)}
                     </td>
                   </tr>
                 </tbody>

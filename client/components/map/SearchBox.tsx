@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { setCenter, setCoordinates, setZoom } from "../../features/map";
+import {
+  setCenterCoordinates,
+  setMarkerCoordinates,
+  setZoom,
+} from "../../features/map";
 import styles from "../../styles/home/home.module.scss";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 
@@ -29,8 +33,8 @@ const SearchBox = () => {
             lat: places[0].geometry?.location?.lat(),
             lng: places[0].geometry?.location?.lng(),
           };
-          dispatch(setCoordinates(coordinates));
-          dispatch(setCenter(coordinates));
+          dispatch(setMarkerCoordinates(coordinates));
+          dispatch(setCenterCoordinates(coordinates));
           dispatch(setZoom(13));
           searchBox.element.value = "";
         }
