@@ -8,9 +8,8 @@ app.use(express.json());
 
 // CORS setting
 const whitelist = [
-  "http://localhost:3000",
-  "https://wherever-forecast.vercel.app/",
-  "https://wherever-forecast.vercel.app",
+  `http://localhost:${process.env.FRONT_END_LOCAL_HOST_PORT}`,
+  process.env.FRONT_END_URL,
 ];
 const corsOptions = {
   origin: (origin, callback) => {
